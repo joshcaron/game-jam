@@ -1,6 +1,7 @@
 package view;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import objects.Monster;
 import objects.Node;
@@ -99,6 +100,54 @@ public class Screen {
 	
 	Screen getDown() {
 		return this.down;
+	}
+	
+	boolean hasLeft() {
+		return !(this.left == null);
+	}
+	
+	Screen getLeft() {
+		return this.left;
+	}
+	
+	boolean hasRight() {
+		return !(this.right == null);
+	}
+	
+	Screen getRight() {
+		return this.right;
+	}
+	
+	void moveMonsters() {
+		// Node collision detection
+		for (int m = 0; m < monsters.size(); m++) {
+			Monster monster = monsters.get(m);
+			monster.move();
+			if (monster.collideTile(this.tiles)) {
+				System.out.println("Collide!");
+				monster.reverseDirection();
+			}
+			
+			for (int n = 0; n < nodes.size(); n++) {
+				Node node = nodes.get(n);
+				monster.collide(node);
+			}
+			
+		}
+	}
+	
+	Monster findPlayer() {
+		Monster player = null;
+		Iterator<Monster> it = this.monsters.iterator();
+		for (int i = 0; it.hasNext(); i++) {
+			Monster m = it.next();
+			if (m.hasMask()) {
+				player = m;
+			}
+		}
+		if (player == null) {
+			throw new RuntimeException("Player not found");
+		} else return player; 
 	}
 }
 

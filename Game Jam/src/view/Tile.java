@@ -4,7 +4,7 @@ import java.awt.Image;
 
 
 //Represents a tile in the game
-class Tile {
+public class Tile {
 	int type;
 	Image img;
 	
@@ -15,5 +15,9 @@ class Tile {
 	
 	Image getImage() {
 		return this.img;
+	}
+	
+	public int getType() {
+		return this.type;
 	}
 }

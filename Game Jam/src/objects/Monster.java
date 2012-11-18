@@ -79,4 +79,12 @@ public class Monster extends Entity {
 	public boolean hasMask() {
 		return this.hasMask;
 	}
+	
+	public void setX(int x) {
+		this.posX = x;
+	}
+	
+	public void setY(int y) {
+		this.posY = y;
+	}
 }

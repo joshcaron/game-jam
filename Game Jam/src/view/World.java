@@ -1,5 +1,4 @@
 package view;
-import java.awt.*;
 import javax.swing.*;
 
 import objects.*;
@@ -7,14 +6,10 @@ import objects.*;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
-import music.PlaySound;
 // The world in which the game is run
 public class World extends JComponent {
 	private static final long serialVersionUID = 1L;
@@ -23,6 +18,9 @@ public class World extends JComponent {
 	 */
 	@SuppressWarnings("serial")
 	World() {
+		init();
+		currentScreen = currentMap.getScreens().get(currentScreenIndex);
+		previousScreen = currentMap.getScreens().get(previousScreenIndex);
 		/*
 		 * Key Bindings created on initialization
 		 */
@@ -41,9 +39,16 @@ public class World extends JComponent {
         actionMap.put("downPressed", new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
             	player.moveDown();
-            	if (!onScreen()) {
-            		player.moveUp();
-            	}
+                if (!onScreen()) {
+                	if(currentScreen.hasDown()) {
+                		previousScreen = currentScreen;
+                		currentScreen = currentScreen.getDown();
+                		player.setY(0);
+                	} else {
+                    	player.moveUp();	
+                	}
+                }
+                
             }
         });
         
@@ -54,8 +59,15 @@ public class World extends JComponent {
             public void actionPerformed(ActionEvent e) {
             	player.moveUp();
                 if (!onScreen()) {
-                	player.moveDown();
+                	if(currentScreen.hasUp()) {
+                		previousScreen = currentScreen;
+                		currentScreen = currentScreen.getUp();
+                		player.setY(560);
+                	} else {
+                    	player.moveDown();	
+                	}
                 }
+                
             }
         });
         
@@ -126,9 +138,12 @@ public class World extends JComponent {
 	static Node n0 = new Node(2,40,40);
 	static Node n1 = new Node(0,440,40);
 	static ArrayList<Node> an = new ArrayList<Node>();
+	
+	
 	// Monsters
 	static Monster m = new Monster(40,40,toad);
 	static ArrayList<Monster> am = new ArrayList<Monster>();
+	static ArrayList<Monster> emptyArrayMonster = new ArrayList<Monster>();
 
 	// Player info
 	static Monster player = new Monster(240,240, toad);
@@ -137,8 +152,8 @@ public class World extends JComponent {
 	static ArrayList<Prop> props = new ArrayList<Prop>();
 	
 	// Screens
-	static Screen s = new Screen("", am, Wdown, an, props);
-	static Screen s1 = new Screen("", am, Sdown, an, props);
+	static Screen s0 = new Screen("", am, Wdown, an, props);
+	static Screen s1 = new Screen("", emptyArrayMonster, Sdown, an, props);
 	static ArrayList<Screen> as = new ArrayList<Screen>();
 	
 	// Maps
@@ -146,7 +161,10 @@ public class World extends JComponent {
 	
 	// Sets the current Map and Screen
 	static Map currentMap = nu;
-	static int currentScreen = 0;
+	static int currentScreenIndex = 0;
+	static int previousScreenIndex = 1;
+	static Screen currentScreen;
+	static Screen previousScreen;
 	
 	// Map Listening
 	static boolean onScreen() {
@@ -182,17 +200,22 @@ public class World extends JComponent {
 		for (int i9 = 0; i9 < 15; i9++) {
 			Sdown.add(Sacross);
 		}
+		// Adding Maps
 		am.add(m);
-		as.add(s);
+		// Adding Screens
+		as.add(s0);
 		as.add(s1);
+		// Adding Nodes
 		an.add(n0);
 		an.add(n1);
+		
+		Screen.makeDownPair(s0, s1);
 	}
 	
 	// Places the graphics on the screen
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		Screen screen = currentMap.screens.get(currentScreen);
+		Screen screen = currentScreen;
 		ArrayList<ArrayList<Tile>> tiles = screen.getTiles();
 		ArrayList<Monster> monsters = screen.getMonsters();
 		Monster player = currentMap.player;
@@ -224,7 +247,7 @@ public class World extends JComponent {
 	
 	// Moves the monsters if applicable on tick
 	static void moveMonsters() {
-		Screen screen = currentMap.screens.get(currentScreen);
+		Screen screen = currentScreen;
 		ArrayList<Monster> monsters = screen.getMonsters();
 		ArrayList<Node> nodes = screen.getNodes();
 		
@@ -262,7 +285,7 @@ public class World extends JComponent {
      */
 	public static void main(String[] args) {
 		init();
-	    JFrame mainFrame = new JFrame("Game Jam 2012");
+	    JFrame mainFrame = new JFrame("Game Quest 7");
 	    mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    mainFrame.getContentPane().add(new World());
 	    mainFrame.pack();

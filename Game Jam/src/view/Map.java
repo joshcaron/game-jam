@@ -11,6 +11,7 @@ public abstract class Map {
 	ArrayList<Screen> screens;
 	Monster player;
 	abstract Monster getPlayer();
+	abstract ArrayList<Screen> getScreens();
 }
 
 //Northeastern level
@@ -23,6 +24,10 @@ class Northeastern extends Map {
 	
 	Monster getPlayer() {
 		return this.player;
+	}
+	
+	public ArrayList<Screen> getScreens() {
+		return this.screens;
 	}
 }
 

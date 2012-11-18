@@ -8,8 +8,11 @@ public class Tile {
 	int type;
 	Image img;
 	
-	Tile(int type, Image img){
+	Tile(int type) {
 		this.type = type;
+	}
+	
+	void setImage(Image img) {
 		this.img = img;
 	}
 	

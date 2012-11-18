@@ -13,4 +13,12 @@ public class Node extends Entity {
 	int direction() {
 		return this.type;
 	}
+	
+	public int getX() {
+		return this.posX;
+	}
+	
+	public int getY() {
+		return this.posY;
+	}
 }

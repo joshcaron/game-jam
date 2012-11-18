@@ -1,5 +1,6 @@
 package objects;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 
 import view.*;
@@ -9,32 +10,26 @@ public class Monster extends Entity {
 	int hitPoints;
 	private int direction;
 	Image img;
-	Image upStand;
-	Image upMove;
-	Image leftStand;
-	Image leftMove;
-	Image rightStand;
-	Image rightMove;
-	Image downStand;
-	Image downMove;
 	boolean hasMask;
 	boolean moving;
-	public Monster(int x, int y, Image upStand, Image upMove, Image leftStand, Image leftMove, Image rightStand, Image rightMove, Image downStand, Image downMove) {
+	public Monster(String imgPath, int x, int y) {
 		this.posX = x;
 		this.posY = y;
 		this.setDirection(-1);
 		this.hasMask = false;
 		this.hitPoints = 3;
-		
-		this.upStand = upStand;
-		this.upMove = upMove;
-		this.leftStand = leftStand;
-		this.leftMove = leftMove;
-		this.rightStand = rightStand;
-		this.rightMove = rightMove;
-		this.downMove = downMove;
-		this.downStand = downStand;
-		this.img = downStand;
+
+		this.img = Toolkit.getDefaultToolkit().createImage(imgPath);;
+		this.moving = true;
+	}
+	
+	public Monster(int x, int y, Image img) {
+		this.posX = x;
+		this.posY = y;
+		this.setDirection(-1);
+		this.hasMask = false;
+		this.hitPoints = 3;
+		this.img = img;
 		this.moving = true;
 	}
 	
@@ -57,7 +52,7 @@ public class Monster extends Entity {
 		if (this.hasMask) {
 			this.posX = this.posX - 40;
 		} else {
-			this.posX = this.posX + 1;
+			this.posX = this.posX - 1;
 		}
 	}
 	

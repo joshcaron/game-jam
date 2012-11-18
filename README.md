@@ -12,8 +12,8 @@ Starting off on Northeastern's campus, you are a mask that travels around, tryin
 Good luck!
 
 ### Credits
-Music - Joey Lafyatis
-Game Engine - Joshua Caron
-Level Editor - Reed Lockwood
-Graphics - Andrew Krischer
+Music - Joey Lafyatis      
+Game Engine - Joshua Caron      
+Level Editor - Reed Lockwood    
+Graphics - Andrew Krischer     
 

@@ -304,12 +304,12 @@
 </Grid>
 
 <Nodelist>
-    <node x="15" y="13" type=""/>
-    <node x="0" y="13" type=""/>
+    <node x="15" y="13" type="0"/>
+    <node x="0" y="13" type="2"/>
 </Nodelist>
 
 <Monsterlist>
-    <monster x="15" y="13" type=""/>
+    <monster x="15" y="13" type="img/monsters/toad.png"/>
 </Monsterlist>
 
 <proplist/>

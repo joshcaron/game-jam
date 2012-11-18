@@ -306,8 +306,8 @@
 <Nodelist/>
 
 <Monsterlist>
-    <monster x="19" y="4" type=""/>
-    <monster x="16" y="11" type=""/>
+    <monster x="19" y="4" type="img/monsters/NUPD.png"/>
+    <monster x="16" y="11" type="img/monsters/NUPD.png"/>
 </Monsterlist>
 
 <proplist/>

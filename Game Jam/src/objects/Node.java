@@ -14,11 +14,11 @@ public class Node extends Entity {
 		return this.type;
 	}
 	
-	public int getX() {
+	public double getX() {
 		return this.posX;
 	}
 	
-	public int getY() {
+	public double getY() {
 		return this.posY;
 	}
 }

@@ -135,31 +135,35 @@ public class World extends JComponent {
 	/*
 	 * Makes the initial objects
 	 */
-	// Loads background images
-	static final Image BlueTile = Toolkit.getDefaultToolkit().createImage("tiles/BlueTile.png");
-	static final Image BrickTile = Toolkit.getDefaultToolkit().createImage("tiles/BrickTile.png");
-	static final Image BrownTile = Toolkit.getDefaultToolkit().createImage("tiles/BrownTile.png");
-	static final Image GrassTile = Toolkit.getDefaultToolkit().createImage("tiles/GrassTile.png");
-	static final Image IndoorTile = Toolkit.getDefaultToolkit().createImage("tiles/IndoorTile.png");
-	static final Image IndoorTileBeige = Toolkit.getDefaultToolkit().createImage("tiles/IndoorTileBeige.png");
-	static final Image LimeTile = Toolkit.getDefaultToolkit().createImage("tiles/LimeTile.png");
-	static final Image MaroonTile = Toolkit.getDefaultToolkit().createImage("tiles/MaroonTile.png");
-	static final Image PeachTile = Toolkit.getDefaultToolkit().createImage("tiles/PeachTile.png");
-	static final Image RoadBottomTile = Toolkit.getDefaultToolkit().createImage("tiles/RoadBottomTile.png");
-	static final Image RoadTileExtra = Toolkit.getDefaultToolkit().createImage("tiles/RoadTileExtra.png");
-	static final Image RoadTopTile = Toolkit.getDefaultToolkit().createImage("tiles/RoadTopTile.png");
-	static final Image RockTextureTile = Toolkit.getDefaultToolkit().createImage("tiles/RockTextureTile.png");
-	static final Image RoofTile = Toolkit.getDefaultToolkit().createImage("tiles/RoofTile.png");
-	static final Image VioletTile = Toolkit.getDefaultToolkit().createImage("tiles/VioletTile.png");
-	static final Image WaterTile = Toolkit.getDefaultToolkit().createImage("tiles/WaterTile.png");
-	static final Image WindowTile = Toolkit.getDefaultToolkit().createImage("tiles/WindowTile.png");
-	static final Image WoodTile = Toolkit.getDefaultToolkit().createImage("tiles/WoodTile.png");
-	// Toad image
-	static final Image toad = Toolkit.getDefaultToolkit().createImage(	"monsters/toad.png");
+	// NEU background images
+	static final Image BlueTile = Toolkit.getDefaultToolkit().createImage("img/tiles/BlueTile.png");
+	static final Image BrickTile = Toolkit.getDefaultToolkit().createImage("img/tiles/BrickTile.png");
+	static final Image BrownTile = Toolkit.getDefaultToolkit().createImage("img/tiles/BrownTile.png");
+	static final Image GrassTile = Toolkit.getDefaultToolkit().createImage("img/tiles/GrassTile.png");
+	static final Image IndoorTile = Toolkit.getDefaultToolkit().createImage("img/tiles/IndoorTile.png");
+	static final Image IndoorTileBeige = Toolkit.getDefaultToolkit().createImage("img/tiles/IndoorTileBeige.png");
+	static final Image LimeTile = Toolkit.getDefaultToolkit().createImage("img/tiles/LimeTile.png");
+	static final Image MaroonTile = Toolkit.getDefaultToolkit().createImage("img/tiles/MaroonTile.png");
+	static final Image PeachTile = Toolkit.getDefaultToolkit().createImage("img/tiles/PeachTile.png");
+	static final Image RoadBottomTile = Toolkit.getDefaultToolkit().createImage("img/tiles/RoadBottomTile.png");
+	static final Image RoadTileExtra = Toolkit.getDefaultToolkit().createImage("img/tiles/RoadTileExtra.png");
+	static final Image RoadTopTile = Toolkit.getDefaultToolkit().createImage("img/tiles/RoadTopTile.png");
+	static final Image RockTextureTile = Toolkit.getDefaultToolkit().createImage("img/tiles/RockTextureTile.png");
+	static final Image RoofTile = Toolkit.getDefaultToolkit().createImage("img/tiles/RoofTile.png");
+	static final Image VioletTile = Toolkit.getDefaultToolkit().createImage("img/tiles/VioletTile.png");
+	static final Image WaterTile = Toolkit.getDefaultToolkit().createImage("img/tiles/WaterTile.png");
+	static final Image WindowTile = Toolkit.getDefaultToolkit().createImage("img/tiles/WindowTile.png");
+	static final Image WoodTile = Toolkit.getDefaultToolkit().createImage("img/tiles/WoodTile.png");
+	// NEU Character Images
+	static final Image toad = Toolkit.getDefaultToolkit().createImage("img/monsters/toad.png");
+	static final Image maskedToad = Toolkit.getDefaultToolkit().createImage("img/monsters/maskedToad.png");
+	static final Image NUPD = Toolkit.getDefaultToolkit().createImage("img/monsters/NUPD.png");
+	static final Image maskedNUPD = Toolkit.getDefaultToolkit().createImage("img/monsters/maskedNUPD.png");
+	static final Image slime = Toolkit.getDefaultToolkit().createImage("img/monsters/slime.png");
+	static final Image maskedSlime = Toolkit.getDefaultToolkit().createImage("img/monsters/maskedSlime.png");
 
 	// Player info
-	static Monster m2 = new Monster(600, 280, toad);
-	static Monster player = m2;
+	static Monster player = Monster.makeMonster(maskedNUPD, 600, 280);
 
 	// Screens
 	static ArrayList<Screen> NEUScreens = new ArrayList<Screen>();
@@ -272,11 +276,11 @@ public class World extends JComponent {
 		for (int q = 0; q < monsters.size(); q++) {
 			Monster m = monsters.get(q);
 			Image img2draw = m.getImage();
-			g.drawImage(img2draw, m.getX(), m.getY(), this);
+			g.drawImage(img2draw, (int) m.getX(), (int) m.getY(), this);
 		}
 
 		// Places the player
-		g.drawImage(player.getImage(), player.getX(), player.getY(), this);
+		g.drawImage(player.getImage(), (int) player.getX(), (int) player.getY(), this);
 	}
 
 	// Dimension setting
@@ -312,14 +316,9 @@ public class World extends JComponent {
 			System.out.println("Y: " + node.getY());	
 		}
 	}
-
-	/*
-	 * THIS IS WHAT MAKES THE GAME RUN
-	 * 
-	 * YAY
-	 */
+	
 	public static void main(String[] args) {
-		final boolean DEBUG = true;
+		final boolean DEBUG = false;
 		init();
 		JFrame mainFrame = new JFrame("Game Quest 7");
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import view.*;
 
 //Represents any Monster in the game 
-public class Monster extends Entity {
+public abstract class Monster extends Entity {
 	int hitPoints;
 	private int direction;
 	Image img;
@@ -23,7 +23,7 @@ public class Monster extends Entity {
 		this.moving = true;
 	}
 	
-	public Monster(int x, int y, Image img) {
+	public Monster(Image img, int x, int y) {
 		this.posX = x;
 		this.posY = y;
 		this.setDirection(-1);
@@ -31,6 +31,9 @@ public class Monster extends Entity {
 		this.hitPoints = 3;
 		this.img = img;
 		this.moving = true;
+	}
+	public void setMoving(boolean b) {
+		this.moving = b;
 	}
 	
 	public void move() {
@@ -54,10 +57,6 @@ public class Monster extends Entity {
 		} else {
 			this.posX = this.posX - 1;
 		}
-	}
-	
-	public void setMoving(boolean b) {
-		this.moving = b;
 	}
 	
 	public void moveRight() {
@@ -159,5 +158,20 @@ public class Monster extends Entity {
 
 	public void setDirection(int direction) {
 		this.direction = direction;
+	}
+	
+	
+	public static Monster makeMonster(String s, int x, int y) {
+		if (s.equals("img/monsters/slime.png")) {
+			return new Slime(s,x,y);
+		} else if (s.equals("img/monsters/toad.png")) {
+			return new Toad(s,x,y);
+		} else {
+			return new Slime(s,x,y);
+		}
+	}
+	
+	public static Monster makeMonster(Image i, int x, int y) {
+		return new Slime(i,x,y);
 	}
 }

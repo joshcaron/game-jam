@@ -304,14 +304,14 @@
 </Grid>
 
 <Nodelist>
-    <node x="15" y="1" type=""/>
-    <node x="18" y="1" type=""/>
-    <node x="18" y="4" type=""/>
-    <node x="15" y="4" type=""/>
+    <node x="15" y="1" type="3"/>
+    <node x="18" y="1" type="0"/>
+    <node x="18" y="4" type="1"/>
+    <node x="15" y="4" type="2"/>
 </Nodelist>
 
 <Monsterlist>
-    <monster x="15" y="1" type=""/>
+    <monster x="15" y="1" type="img/monsters/slime.png"/>
 </Monsterlist>
 
 <proplist/>

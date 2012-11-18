@@ -304,20 +304,19 @@
 </Grid>
 
 <Nodelist>
-    <node x="2" y="7" type=""/>
-    <node x="0" y="7" type=""/>
-    <node x="0" y="12" type=""/>
-    <node x="2" y="12" type=""/>
-    <node x="19" y="0" type=""/>
-    <node x="17" y="0" type=""/>
-    <node x="17" y="9" type=""/>
-    <node x="19" y="9" type=""/>
+    <node x="2" y="7" type="3"/>
+    <node x="0" y="7" type="2"/>
+    <node x="0" y="12" type="1"/>
+    <node x="2" y="12" type="0"/>
+    <node x="19" y="0" type="0"/>
+    <node x="17" y="0" type="3"/>
+    <node x="17" y="9" type="2"/>
+    <node x="19" y="9" type="1"/>
 </Nodelist>
 
 <Monsterlist>
-    <monster x="2" y="7" type=""/>
-    <monster x="17" y="9" type=""/>
-    <monster x="17" y="8" type=""/>
+    <monster x="2" y="7" type="img/monsters/NUPD.png"/>
+    <monster x="17" y="9" type="img/monsters/slime.png"/>
 </Monsterlist>
 
 <proplist/>

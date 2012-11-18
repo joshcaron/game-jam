@@ -1,14 +1,14 @@
 package objects;
 
 public abstract class Entity {
-	protected int posX;
-	protected int posY;
+	protected double posX;
+	protected double posY;
 	
-	public int getX() {
+	public double getX() {
 		return this.posX;
 	}
 	
-	public int getY() {
+	public double getY() {
 		return this.posY;
 	}
 }

@@ -33,7 +33,7 @@ public class Screen {
 	Screen down;
 	final static int GRIDWIDTH = 20;
 	final static int GRIDHEIGHT = 15;
-	final static boolean DEBUG = true;
+	final static boolean DEBUG = false;
 	
 	
 	
@@ -56,27 +56,30 @@ public class Screen {
 			// This is the XML doc we need
 			doc = dBuilder.parse(xmlfile);
 			//`doc.getDocumentElement().normalize();
-			
-			System.out.println("XML loaded! \n");
-
+			if (DEBUG) {
+				System.out.println(s + "XML loaded! \n");
+			}
 			// Loads the list containing Grid
 			final NodeList GRID_NODE_LIST = doc.getElementsByTagName("Grid");
 			// Loads Grid
 			final org.w3c.dom.Node GRID_NODE = GRID_NODE_LIST.item(0);
-			System.out.println(GRID_NODE.getNodeName() + " loaded!");
-			
+			if (DEBUG) {
+				System.out.println(GRID_NODE.getNodeName() + " loaded!");
+			}
 			// Loads the list containing Nodelist
 			final NodeList NODELIST_NODE_LIST = doc.getElementsByTagName("Nodelist");
 			// Loads Nodelist
 			final org.w3c.dom.Node NODELIST_NODE = NODELIST_NODE_LIST.item(0);
-			System.out.println(NODELIST_NODE.getNodeName() + " loaded!");
-			
+			if (DEBUG) {
+				System.out.println(NODELIST_NODE.getNodeName() + " loaded!");
+			}
 			// Loads the list containg Monsterlist
 			final NodeList MONSTER_NODE_LIST = doc.getElementsByTagName("Monsterlist");
 			// Loads Monsterlist
 			final org.w3c.dom.Node MONSTERLIST_NODE = MONSTER_NODE_LIST.item(0);
-			System.out.println(MONSTERLIST_NODE.getNodeName() + " loaded!");
-			
+			if (DEBUG) {
+				System.out.println(MONSTERLIST_NODE.getNodeName() + " loaded!");
+			}
 			if (DEBUG) {
 				// Finding the children of GRID
 				System.out.println("\nFinding children of GRID");
@@ -182,7 +185,7 @@ public class Screen {
 					String typeVal = type;
 					int xVal = Integer.parseInt(x);
 					int yVal = Integer.parseInt(y);
-					this.monsters.add(new Monster(typeVal, xVal*40, yVal*40));
+					this.monsters.add(Monster.makeMonster(typeVal, xVal*40, yVal*40));
 				}
 			}
 		} catch (Exception e){

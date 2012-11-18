@@ -315,10 +315,10 @@
 </Nodelist>
 
 <Monsterlist>
-    <monster x="15" y="8" type="monsters/toad.png"/>
-    <monster x="18" y="7" type="monsters/toad.png"/>
-    <monster x="10" y="8" type="monsters/toad.png"/>
-    <monster x="16" y="2" type="monsters/toad.png"/>
+    <monster x="15" y="8" type="img/monsters/toad.png"/>
+    <monster x="18" y="7" type="img/monsters/slime.png"/>
+    <monster x="10" y="1" type="img/monsters/slime.png"/>
+    <monster x="16" y="2" type="img/monsters/toad.png"/>
 </Monsterlist>
 
 <proplist/>

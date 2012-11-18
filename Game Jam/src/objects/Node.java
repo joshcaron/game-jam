@@ -21,4 +21,13 @@ public class Node extends Entity {
 	public double getY() {
 		return this.posY;
 	}
+
+	public void moveLeft() {
+	}
+	public void moveRight() {
+	}
+	public void moveUp() {
+	}
+	public void moveDown() {
+	}
 }

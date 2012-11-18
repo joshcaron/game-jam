@@ -1,7 +1,7 @@
 <NEUScreen3>
 
 <Grid>
-    <tile value="0"/>
+    <tile value="9"/>
     <tile value="9"/>
     <tile value="9"/>
     <tile value="9"/>
@@ -21,7 +21,7 @@
     <tile value="8"/>
     <tile value="0"/>
     <tile value="9"/>
-    <tile value="0"/>
+    <tile value="9"/>
     <tile value="9"/>
     <tile value="9"/>
     <tile value="9"/>

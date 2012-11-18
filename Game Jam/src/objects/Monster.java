@@ -9,13 +9,14 @@ import view.*;
 public abstract class Monster extends Entity {
 	int hitPoints;
 	private int direction;
-	Image img;
 	boolean hasMask;
 	boolean moving;
+	public Mask mask;
 	public Monster(String imgPath, int x, int y) {
 		this.posX = x;
 		this.posY = y;
 		this.setDirection(-1);
+		
 		this.hasMask = false;
 		this.hitPoints = 3;
 
@@ -52,6 +53,7 @@ public abstract class Monster extends Entity {
 	}
 
 	public void moveLeft() {
+		this.direction = 0;
 		if (this.hasMask) {
 			this.posX = this.posX - 40;
 		} else {
@@ -60,6 +62,7 @@ public abstract class Monster extends Entity {
 	}
 	
 	public void moveRight() {
+		this.direction = 2;
 		if (this.hasMask) {
 			this.posX = this.posX + 40;
 		} else {
@@ -67,6 +70,7 @@ public abstract class Monster extends Entity {
 		}
 	}
 	public void moveUp() {
+		this.direction = 1;
 		if (this.hasMask) {
 			this.posY = this.posY - 40;
 		} else {
@@ -74,6 +78,7 @@ public abstract class Monster extends Entity {
 		}
 	}
 	public void moveDown() {
+		this.direction = 3;
 		if (this.hasMask) {
 			this.posY = this.posY + 40;
 		} else {
@@ -83,6 +88,8 @@ public abstract class Monster extends Entity {
 	
 	public void makePlayer() {
 		this.hasMask = true;
+		this.mask = new Mask(this.posX, this.posY, "/img/Mask Plain.png");
+		this.mask.setMonster(this);
 	}
 	
 	public boolean collide(Entity e) {
@@ -159,8 +166,7 @@ public abstract class Monster extends Entity {
 	public void setDirection(int direction) {
 		this.direction = direction;
 	}
-	
-	
+		
 	public static Monster makeMonster(String s, int x, int y) {
 		if (s.equals("img/monsters/slime.png")) {
 			return new Slime(s,x,y);
@@ -173,5 +179,20 @@ public abstract class Monster extends Entity {
 	
 	public static Monster makeMonster(Image i, int x, int y) {
 		return new Slime(i,x,y);
+	}
+	
+	public void dropPlayer() {
+		this.hasMask = false;
+		this.mask = null;
+	}
+	
+	public void throwMask() {
+		if (this.hasMask()) {
+			this.mask.boomerang(this.direction);
+		}
+	}
+	
+	public Mask getMask() {
+		return this.mask;
 	}
 }

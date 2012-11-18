@@ -7,12 +7,12 @@ public class PlaySound
 {
     public static void main(String[] args)
     {
-        sound = new File("/home/josh/Dropbox/GameJam 2012/First_Level_Music.wav"); // Write you own file location here and be aware that it needs to be an .wav file
+        sound = new File("music/First_Level_Music.wav"); // Write you own file location here and be aware that it needs to be an .wav file
 
         new Thread(play).start();
     }
 
-    static File sound;
+    public static File sound;
     static boolean muted = false; // This should explain itself
     static float volume = 100.0f; // This is the volume that goes from 0 to 100
     static float pan = 0.0f; // The balance between the speakers 0 is both sides and it goes from -1 to 1

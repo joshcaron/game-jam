@@ -9,7 +9,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.NodeList;
 
@@ -302,7 +301,7 @@ public class Screen {
 			
 		}
 	}
-	
+	@SuppressWarnings("unused")
 	Monster findPlayer() {
 		Monster player = null;
 		Iterator<Monster> it = this.monsters.iterator();
@@ -317,6 +316,7 @@ public class Screen {
 		} else return player; 
 	}
 	
+	@SuppressWarnings("unused")
 	void setTileImages() {
 		Iterator<ArrayList<Tile>> it = this.tiles.iterator();
 		

@@ -18,61 +18,14 @@ import music.PlaySound;
 // The world in which the game is run
 public class World extends JComponent {
 	private static final long serialVersionUID = 1L;
-	
-	// Loads the wood image
-	static final Image wood = Toolkit.getDefaultToolkit().createImage("/home/josh/Dropbox/GameJam 2012/wood_tile.png");
-	// Loads the stuff image
-	static final Image stuff = Toolkit.getDefaultToolkit().createImage("/home/josh/Dropbox/GameJam 2012/Stuff.png");
-	// Loads the toad image
-	static final Image toad = Toolkit.getDefaultToolkit().createImage("/home/josh/Dropbox/GameJam 2012/Toad 1 down.png");
-	static final Image toadDown = Toolkit.getDefaultToolkit().createImage("/home/josh/Dropbox/GameJam 2012/Toad 2 down.png");
-	// Creates the wooden tile
-	static Tile woodTile = new Tile(0, wood);
-	// Creates the stuff tile
-	static Tile stuffTile = new Tile(0, stuff);
-	
-	// Creates the images in the rows across
-	static ArrayList<Tile> Wacross = new ArrayList<Tile>();
-	// ArrayList of the rows
-	static ArrayList<ArrayList<Tile>> Wdown = new ArrayList<ArrayList<Tile>>();// Creates the images in the rows across
-	static ArrayList<Tile> Sacross = new ArrayList<Tile>();
-	// ArrayList of the rows
-	static ArrayList<ArrayList<Tile>> Sdown = new ArrayList<ArrayList<Tile>>();
-	
-	// Nodes
-	static Node n0 = new Node(2,40,40);
-	static Node n1 = new Node(0,440,40);
-	static ArrayList<Node> an = new ArrayList<Node>();
-	// Monsters
-	static Monster m = new Monster(40,40,toad);
-	static ArrayList<Monster> am = new ArrayList<Monster>();
-
-	// Player info
-	static Monster player = new Monster(240,240, toad);
-	
-	// Props
-	static ArrayList<Prop> props = new ArrayList<Prop>();
-	
-	// Screens
-	static Screen s = new Screen(0, am, Wdown, an, props);
-	static Screen s1 = new Screen(1, am, Sdown, an, props);
-	static ArrayList<Screen> as = new ArrayList<Screen>();
-	
-	// Maps
-	static Map nu = new Northeastern(as,player);
-	
-	
-	// Map Listening
-	static boolean onScreen() {
-		return (0 <= player.getX()) && (760 >= player.getX()) && (0 <= player.getY()) && (560 >= player.getY());
-	}
-	
-	// Key Listening
-	InputMap inputMap = getInputMap(WHEN_IN_FOCUSED_WINDOW);
-	ActionMap actionMap = getActionMap();
-	
+	/*
+	 * Initial Constructor for World.
+	 */
 	@SuppressWarnings("serial")
 	World() {
+		/*
+		 * Key Bindings created on initialization
+		 */
 		// Escape Key
 		inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE,0), "quit" );
 	    
@@ -144,7 +97,75 @@ public class World extends JComponent {
         });
         */
 	}
-    
+	
+	
+	/*
+	 * Makes the initial objects... for now...
+	 */
+	// Loads the wood image
+	static final Image wood = Toolkit.getDefaultToolkit().createImage("/home/josh/Dropbox/GameJam 2012/wood_tile.png");
+	// Loads the stuff image
+	static final Image stuff = Toolkit.getDefaultToolkit().createImage("/home/josh/Dropbox/GameJam 2012/Stuff.png");
+	// Loads the toad image
+	static final Image toad = Toolkit.getDefaultToolkit().createImage("/home/josh/Dropbox/GameJam 2012/Toad 1 down.png");
+	static final Image toadDown = Toolkit.getDefaultToolkit().createImage("/home/josh/Dropbox/GameJam 2012/Toad 2 down.png");
+	// Creates the wooden tile
+	static Tile woodTile = new Tile(0, wood);
+	// Creates the stuff tile
+	static Tile stuffTile = new Tile(0, stuff);
+	
+	// Creates the images in the rows across
+	static ArrayList<Tile> Wacross = new ArrayList<Tile>();
+	// ArrayList of the rows
+	static ArrayList<ArrayList<Tile>> Wdown = new ArrayList<ArrayList<Tile>>();// Creates the images in the rows across
+	static ArrayList<Tile> Sacross = new ArrayList<Tile>();
+	// ArrayList of the rows
+	static ArrayList<ArrayList<Tile>> Sdown = new ArrayList<ArrayList<Tile>>();
+	
+	// Nodes
+	static Node n0 = new Node(2,40,40);
+	static Node n1 = new Node(0,440,40);
+	static ArrayList<Node> an = new ArrayList<Node>();
+	// Monsters
+	static Monster m = new Monster(40,40,toad);
+	static ArrayList<Monster> am = new ArrayList<Monster>();
+
+	// Player info
+	static Monster player = new Monster(240,240, toad);
+	
+	// Props
+	static ArrayList<Prop> props = new ArrayList<Prop>();
+	
+	// Screens
+	static Screen s = new Screen("", am, Wdown, an, props);
+	static Screen s1 = new Screen("", am, Sdown, an, props);
+	static ArrayList<Screen> as = new ArrayList<Screen>();
+	
+	// Maps
+	static Map nu = new Northeastern(as,player);
+	
+	// Sets the current Map and Screen
+	static Map currentMap = nu;
+	static int currentScreen = 0;
+	
+	// Map Listening
+	static boolean onScreen() {
+		return (0 <= player.getX()) && (760 >= player.getX()) && (0 <= player.getY()) && (560 >= player.getY());
+	}
+	
+	// Key Listening
+	InputMap inputMap = getInputMap(WHEN_IN_FOCUSED_WINDOW);
+	ActionMap actionMap = getActionMap();
+	
+	// Current tick for the world
+	static int tick = -1;
+	
+	
+	
+	
+    /*
+     * Required Methods for the World
+     */
 	// Populates the ArrayLists with images
 	static void init() {
 		player.makePlayer();
@@ -167,10 +188,8 @@ public class World extends JComponent {
 		an.add(n0);
 		an.add(n1);
 	}
-	static Map currentMap = nu;
-	static int currentScreen = 0;
+	
 	// Places the graphics on the screen
-	static int tick = -1;
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		Screen screen = currentMap.screens.get(currentScreen);
@@ -202,6 +221,8 @@ public class World extends JComponent {
 		// Places the player
 		g.drawImage(toad, player.getX(), player.getY(), this);
 	}
+	
+	// Moves the monsters if applicable on tick
 	static void moveMonsters() {
 		Screen screen = currentMap.screens.get(currentScreen);
 		ArrayList<Monster> monsters = screen.getMonsters();
@@ -222,7 +243,7 @@ public class World extends JComponent {
 		}
 	}
 	
-    
+    // Dimension setting
 	public Dimension getPreferredSize() {
 		return new Dimension(800, 600);
 	}
@@ -230,6 +251,15 @@ public class World extends JComponent {
     public Dimension getMinimumSize() {
     	return getPreferredSize();
     } 
+    
+    
+    
+    
+    /*
+     * THIS IS WHAT MAKES THE GAME RUN
+     * 
+     * YAY
+     */
 	public static void main(String[] args) {
 		init();
 	    JFrame mainFrame = new JFrame("Game Jam 2012");
@@ -242,87 +272,4 @@ public class World extends JComponent {
 	    	tick++;
 	    }
 	}
-
 }
-
-// Each level of the game
-abstract class Map {
-	int id;
-	ArrayList<Screen> screens;
-	Monster player;
-	abstract Monster getPlayer();
-}
-
-// Northeastern level
-class Northeastern extends Map {
-	Northeastern(ArrayList<Screen> screens, Monster p) {
-		this.screens = screens;
-		this.player = p;
-		this.id = 0;
-	}
-	
-	Monster getPlayer() {
-		return this.player;
-	}
-}
-
-
-// Represents the current screen that is being drawn
-class Screen {
-	int id;
-	ArrayList<Monster> monsters;
-	ArrayList<ArrayList<Tile>> tiles;
-	ArrayList<Node> nodes;
-	ArrayList<Prop> props;
-	
-	Screen(int id, ArrayList<Monster> monsters, ArrayList<ArrayList<Tile>> tiles, ArrayList<Node> nodes, ArrayList<Prop> props) {
-		this.monsters = monsters;
-		this.id = id;
-		this.tiles = tiles;
-		this.nodes = nodes;
-		this.props = props;
-	}
-	
-	ArrayList<ArrayList<Tile>> getTiles() {
-		return this.tiles;
-	}
-	
-	ArrayList<Monster> getMonsters() {
-		return this.monsters;
-	}
-	
-	ArrayList<Node> getNodes() {
-		return this.nodes;
-	}
-	
-	
-}
-
-// Represents a tile in the game
-class Tile {
-	int type;
-	Image img;
-	
-	Tile(int type, Image img){
-		this.type = type;
-		this.img = img;
-	}
-	
-	Image getImage() {
-		return this.img;
-	}
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
